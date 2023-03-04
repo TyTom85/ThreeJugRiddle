@@ -52,7 +52,12 @@ const int winEffects = 53;
 bool pumpState = false;
 bool gameReset = false;
 bool gameWin = false;
-
+bool  Button_A2C_State = false;
+bool  Button_A2B_State = false;
+bool  Button_B2A_State = false;
+bool  Button_B2C_State = false;
+bool  Button_C2A_State = false;
+bool  Button_C2B_State = false;
 
 ///////////////////////////////////////   SETUP    ///////////////////////////////////////
 void setup()
@@ -114,35 +119,95 @@ if (pumpState == false)
 //////////////////////////////////////////// PLAYER PRESS VARIOUS BUTTON TO MOVE WATER BETWEEN TANKS /////////////////////////////////////////////////////////////////////
 if (digitalRead(Button_A2B) == HIGH)
   {
-    if (digitalRead(B_Top) == LOW  && digitalRead(A_Bottom) == HIGH)
+    Button_A2B_State = true;
+    run_Pumps;
+  }
+  else
     {
-      if (digitalRead(A_to_C) == LOW && digitalRead(B_to_A) == LOW && digitalRead(B_to_C) == LOW && digitalRead(C_to_A) == LOW && digitalRead(C_to_B) == LOW)
-      {
-        digitalWrite(A_to_B, HIGH);
-      }
-    }
-  }
-else 
-  {
-    digitalWrite(A_to_B, LOW);       
-  }
-    
+     Button_A2B_State = false; 
+    }  
 if (digitalRead(Button_A2C) == HIGH)
   {
-    if (digitalRead(C_Top) == LOW && digitalRead(A_Bottom) == HIGH)
+    Button_A2C_State = true;
+    run_Pumps;
+  }
+  else
     {
-      if (digitalRead(A_to_B) == LOW && digitalRead(B_to_A) == LOW && digitalRead(B_to_C) == LOW && digitalRead(C_to_A) == LOW && digitalRead(C_to_B) == LOW)
-      {
-        digitalWrite(A_to_C, HIGH);
-      }
+     Button_A2C_State = false; 
     }
-  }
-else 
-  {
-    digitalWrite(A_to_C, LOW);       
-  }
-
 if (digitalRead(Button_B2A) == HIGH)
+  {
+    Button_B2A_State = true;
+    run_Pumps;
+  }
+  else
+    {
+     Button_B2A_State = false; 
+    }  
+if (digitalRead(Button_B2C) == HIGH)
+  {
+    Button_B2C_State = true;
+    run_Pumps;
+  }
+  else
+    {
+     Button_B2C_State = false; 
+    }  
+if (digitalRead(Button_C2A) == HIGH)
+  {
+    Button_C2A_State = true;
+    run_Pumps;
+  }
+  else
+    {
+     Button_C2A_State = false; 
+    }  
+if (digitalRead(Button_C2B) == HIGH)
+  {
+    Button_C2B_State = true;
+    run_Pumps;
+  }        
+  else
+    {
+     Button_C2B_State = false; 
+    }
+}
+
+void run_Pumps()
+{
+if (Button_A2B_State == true)
+  {
+    if (digitalRead(B_Top) == LOW && digitalRead(A_Bottom) == HIGH)
+      {
+        if (digitalRead(A_to_C) == LOW && digitalRead(B_to_A) == LOW && digitalRead(B_to_C) == LOW && digitalRead(C_to_A) == LOW && digitalRead(C_to_B) == LOW)
+          {
+            digitalWrite(A_to_B, HIGH);
+          }
+      }
+      else 
+        {
+          digitalWrite(A_to_B, LOW);   
+          Button_A2B_State = false;                  
+        }          
+   }
+      
+if (Button_A2C_State == true)
+  {
+    if (digitalRead(C_Top) == LOW && digitalRead(A_Bottom) == HIGH)
+      {
+        if (digitalRead(A_to_B) == LOW && digitalRead(B_to_A) == LOW && digitalRead(B_to_C) == LOW && digitalRead(C_to_A) == LOW && digitalRead(C_to_B) == LOW)
+          {
+            digitalWrite(A_to_C, HIGH);
+          }
+      }
+      else 
+        {
+          digitalWrite(A_to_C, LOW);   
+          Button_A2C_State = false;                  
+        }       
+    }
+
+if (Button_B2A_State == true)
   {
     if (digitalRead(A_Top) == LOW && digitalRead(B_Bottom) == HIGH)
     {
@@ -151,13 +216,13 @@ if (digitalRead(Button_B2A) == HIGH)
         digitalWrite(B_to_A, HIGH);
       }
     }
-  }
-else 
-  {
-    digitalWrite(B_to_A, LOW);       
+    else 
+      {
+        digitalWrite(B_to_A, LOW);       
+      }
   }
 
-if (digitalRead(Button_B2C) == HIGH)
+if (Button_B2C_State == true)
   {
     if (digitalRead(C_Top) == LOW && digitalRead(B_Bottom) == HIGH)
     {
@@ -166,13 +231,13 @@ if (digitalRead(Button_B2C) == HIGH)
         digitalWrite(B_to_C, HIGH);
       }
     }
-  }
-else 
-  {
-    digitalWrite(B_to_C, LOW);       
+    else 
+      {
+        digitalWrite(B_to_C, LOW);       
+      }
   }    
   
-if (digitalRead(Button_C2A) == HIGH)
+if (Button_C2A_State == true)
   {  
     if ( digitalRead(A_Top) == LOW && digitalRead(C_Bottom) == HIGH)
     {
@@ -181,13 +246,13 @@ if (digitalRead(Button_C2A) == HIGH)
         digitalWrite(C_to_A, HIGH);
       }
     }
-  }
-else 
-  {
-    digitalWrite(C_to_A, LOW);       
+    else 
+      {
+        digitalWrite(C_to_A, LOW);       
+      }
   }
   
-if (digitalRead(Button_C2B) == HIGH)
+if (Button_C2B_State == true)
   {
     if (digitalRead(B_Top) == LOW && digitalRead(C_Bottom) == HIGH)
     {
@@ -196,13 +261,12 @@ if (digitalRead(Button_C2B) == HIGH)
         digitalWrite(C_to_B, HIGH);
       }
     }
-  }
-else 
-  {
-    digitalWrite(C_to_B, LOW);       
-  }  
+    else 
+      {
+        digitalWrite(C_to_B, LOW);       
+      }  
+   }
 }
-
 
 void resetGame()
 {
