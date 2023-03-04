@@ -218,7 +218,8 @@ if (Button_B2A_State == true)
     }
     else 
       {
-        digitalWrite(B_to_A, LOW);       
+        digitalWrite(B_to_A, LOW);  
+        Button_B2A_State = false;     
       }
   }
 
@@ -233,7 +234,8 @@ if (Button_B2C_State == true)
     }
     else 
       {
-        digitalWrite(B_to_C, LOW);       
+        digitalWrite(B_to_C, LOW);  
+        Button_B2C_State = false;     
       }
   }    
   
@@ -248,7 +250,8 @@ if (Button_C2A_State == true)
     }
     else 
       {
-        digitalWrite(C_to_A, LOW);       
+        digitalWrite(C_to_A, LOW); 
+        Button_C2A_State = false;      
       }
   }
   
@@ -263,7 +266,8 @@ if (Button_C2B_State == true)
     }
     else 
       {
-        digitalWrite(C_to_B, LOW);       
+        digitalWrite(C_to_B, LOW); 
+        Button_C2B_State = false;      
       }  
    }
 }
